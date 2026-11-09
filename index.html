@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Phone Mirror</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: #111; color: #ddd; height: 100vh; display: flex; flex-direction: column; }
+  header { display: flex; gap: 8px; align-items: center; padding: 8px 12px; background: #1b1b1b; border-bottom: 1px solid #2a2a2a; flex-wrap: wrap; }
+  header b { margin-right: 8px; }
+  button, select { background: #2a2a2a; color: #eee; border: 1px solid #3a3a3a; border-radius: 6px; padding: 6px 12px; font: inherit; cursor: pointer; }
+  button:hover:not(:disabled) { background: #353535; }
+  button:disabled { opacity: .4; cursor: default; }
+  #connect { background: #2563eb; border-color: #2563eb; }
+  #status { flex: 1; min-width: 200px; color: #9a9a9a; }
+  #status.err { color: #f87171; }
+  main { flex: 1; display: flex; min-height: 0; }
+  #stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; min-height: 0; }
+  #stage canvas { max-width: 100%; max-height: 100%; outline: none; border-radius: 8px; box-shadow: 0 0 0 1px #333; touch-action: none; }
+  #keys { display: flex; flex-direction: column; gap: 6px; padding: 12px; border-left: 1px solid #2a2a2a; }
+  #help { color: #777; max-width: 420px; text-align: left; }
+  #help li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<header>
+  <b>Phone Mirror</b>
+  <button id="connect">Connect</button>
+  <button id="disconnect" disabled>Disconnect</button>
+  <select id="quality" title="Max resolution">
+    <option value="1024">Low (1024)</option>
+    <option value="1600" selected>Medium (1600)</option>
+    <option value="0">Full</option>
+  </select>
+  <span id="status">Plug in your phone with USB debugging on, then click Connect.</span>
+</header>
+<main>
+  <div id="stage">
+    <div id="help">
+      <ol>
+        <li>Phone: Settings &gt; About phone &gt; tap Build number 7 times.</li>
+        <li>Settings &gt; System &gt; Developer options &gt; turn on USB debugging.</li>
+        <li>Plug in USB, set USB mode to File transfer if asked.</li>
+        <li>Click Connect, pick the phone, tap Allow on the phone.</li>
+      </ol>
+      <p>Controls: click/drag = touch, right-click = Back, scroll wheel = scroll, click the screen then type to send text.</p>
+    </div>
+  </div>
+  <div id="keys" hidden>
+    <button id="k-back">Back</button>
+    <button id="k-home">Home</button>
+    <button id="k-recents">Recents</button>
+    <button id="k-volup">Vol +</button>
+    <button id="k-voldown">Vol -</button>
+    <button id="k-power">Power</button>
+  </div>
+</main>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
